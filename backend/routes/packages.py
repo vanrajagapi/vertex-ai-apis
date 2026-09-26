@@ -27,7 +27,7 @@ router = APIRouter()
 # ─────────────────────────────────────────
 # List all packages
 # ─────────────────────────────────────────
-
+@router.get("", response_model=list[PackageSummary])
 @router.get("/", response_model=list[PackageSummary])
 async def list_packages(db: AsyncSession = Depends(get_db)):
     result = await db.execute(
