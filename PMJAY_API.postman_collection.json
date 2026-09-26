@@ -1,0 +1,56 @@
+{
+  "info": {
+    "name": "PMJAY Claim Pre-Auth API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    { "key": "base_url", "value": "http://localhost:8000" }
+  ],
+  "item": [
+    {
+      "name": "Health check",
+      "request": {
+        "method": "GET",
+        "url": "{{base_url}}/api/v1/health"
+      }
+    },
+    {
+      "name": "List all packages",
+      "request": {
+        "method": "GET",
+        "url": "{{base_url}}/api/v1/packages/"
+      }
+    },
+    {
+      "name": "Get single package",
+      "request": {
+        "method": "GET",
+        "url": "{{base_url}}/api/v1/packages/P08012"
+      }
+    },
+    {
+      "name": "Score a claim (stub — no docs)",
+      "request": {
+        "method": "POST",
+        "url": "{{base_url}}/api/v1/claims/score",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"claim_id\": \"CLM-2026-000001\",\n  \"package_code\": \"P08012\",\n  \"hospital_id\": \"HOSP-GJ-0042\",\n  \"beneficiary_id\": \"BEN-GJ-884712\",\n  \"patient_name\": \"Ramesh Patel\",\n  \"patient_dob\": \"1958-03-15\",\n  \"patient_gender\": \"Male\",\n  \"admission_date\": \"2026-04-10\",\n  \"discharge_date\": \"2026-04-15\",\n  \"documents\": []\n}"
+        }
+      }
+    },
+    {
+      "name": "Score a claim (with documents)",
+      "request": {
+        "method": "POST",
+        "url": "{{base_url}}/api/v1/claims/score",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"claim_id\": \"CLM-2026-000002\",\n  \"package_code\": \"P19001\",\n  \"hospital_id\": \"HOSP-MH-0018\",\n  \"beneficiary_id\": \"BEN-MH-221033\",\n  \"patient_name\": \"Sunita Desai\",\n  \"patient_dob\": \"1945-07-22\",\n  \"patient_gender\": \"Female\",\n  \"admission_date\": \"2026-05-01\",\n  \"discharge_date\": \"2026-05-02\",\n  \"documents\": [\n    {\n      \"doc_id\": \"DOC-001\",\n      \"doc_type\": \"consent_form\",\n      \"filename\": \"consent.pdf\",\n      \"content_base64\": \"<base64>\"\n    },\n    {\n      \"doc_id\": \"DOC-002\",\n      \"doc_type\": \"clinical_notes\",\n      \"filename\": \"surgery_notes.pdf\",\n      \"content_base64\": \"<base64>\"\n    },\n    {\n      \"doc_id\": \"DOC-003\",\n      \"doc_type\": \"lab_report\",\n      \"filename\": \"preop_labs.pdf\",\n      \"content_base64\": \"<base64>\"\n    },\n    {\n      \"doc_id\": \"DOC-004\",\n      \"doc_type\": \"surgery_photo\",\n      \"filename\": \"postop_eye.jpg\",\n      \"content_base64\": \"<base64>\"\n    }\n  ]\n}"
+        }
+      }
+    }
+  ]
+}
